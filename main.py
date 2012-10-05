@@ -54,9 +54,10 @@ class MainHandler(webapp2.RequestHandler):
             displayalarm = alarms[0]
             memcache.set('alarm', alarms) 
         today = datetime.today()
-        timedelta = abs(today-displayalarm.alarm_datetime)
+        timedelta = today-displayalarm.alarm_datetime
 
-        template_values={'days':timedelta.days}
+        template_values={'days':timedelta.days,
+                         'hours': timedelta.seconds / 3600}
         template = jinja_environment.get_template('index.htm')       
         self.response.out.write(template.render(template_values))
 
