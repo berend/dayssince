@@ -4,20 +4,40 @@
         <title>13 days</title>
         <link href='http://fonts.googleapis.com/css?family=Quantico' rel='stylesheet' type='text/css'>
         <style type="text/css">
-        #content {position:absolute; top:50%; height:240px; width:100%; margin-top:-120px;text-align:center; font-family: 'Quantico', sans-serif;; font-size: 28pt}
+        #content {position:absolute; top:50%; height:240px; width:100%; margin-top:-120px;text-align:center; font-family: 'Quantico', sans-serif;; font-size: 14pt}
         </style>
     </head>
     <body>
         <div id="content">
-            {{message}}<br>
-        <form method="post">
-            <p></p>
-            <input type="text" name="date"> (format dd.mm.yyyy)
-            <br>
-            <input type="text" name="time"> (format hh:mm)
-            <br>
-            <input type="submit">
+            <form method="post">
+            <table border="0">
+                <tr>
+                    <td colspan="2">
+                        <p>{{message}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="date"> </td>
+                    <td>(format dd.mm.yyyy)</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="time"></td>
+                    <td>(format hh:mm)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit">
+                    </td>
+                </tr>
+            </table>
         </form>
+        <ul>
+            {% for item in alarms %}
+            <li>{{item.alarm_datetime}}</li>
+            {% endfor %}
+            
+        </ul>
+
         </div>
     </body>
 </html>

@@ -10,6 +10,11 @@
     <body>
         <div id="content">
             It's been<br><span style="font-size: 150%">{{days}} days and {{hours}} hours</span><br>without firealarm
+            <br><br><br><br>
+            {% if show_records %}
+            <span style="font-size: 50%">record high: {{record_high_days}} days and {{record_high_hours}} hours<br>
+                record low: {{record_low_days}} days and {{record_low_hours}} hours</span>
+            {% endif %}
         </div>
     </body>
 </html>
