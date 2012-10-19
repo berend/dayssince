@@ -15,8 +15,8 @@
             http:\\www.yetToBeDefined.tld<input type="text" name="custompath" maxlength="20">&nbsp;&nbsp;&nbsp;(max length: 30 characters)
             <br>
             {% if isAvailable %}
-                <input type="submit" value="Check availability">
-                <input type="hidden" value="{{avail_hash}}"
+                <input type="submit" value="Submit">
+                <input type="hidden" value="{{avail_hash}}" name="availhash">
             {% else %}
                 {{errormessage}}
                 <input type="submit" value="Check availability">

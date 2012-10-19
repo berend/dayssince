@@ -20,6 +20,8 @@ import os
 import logging
 import json
 
+import utils
+
 from google.appengine.api import memcache
 from google.appengine.ext import db
 from datetime import datetime
@@ -33,6 +35,11 @@ DEBUG = os.environ['SERVER_SOFTWARE'].startswith('Developement')
 
 
 class BaseHandler(webapp2.RequestHandler):
+    def __init__(self):
+        # check cookie, set username
+        user_name_cookie = self.request.cookies.get("user_id")
+        self.user_id = utils.check_cookie(user_name_cookie)
+
     def render(self, template_name, template_values):
         template = jinja_environment.get_template(template_name)
         self.response.out.write(template.render(template_values))
@@ -72,57 +79,63 @@ class MainHandler(BaseHandler):
 
 class AdminPage(BaseHandler):
     def get(self, path):
-        message = "Leave empty to set to (now)"
-        template_values = {"message": message}
-        self.render('reset.htm', template_values)
+        if self.user_id:
+            message = "Leave empty to set to (now)"
+            template_values = {"message": message}
+            self.render('reset.htm', template_values)
+        else:
+            self.redirect("/%s/login" % path)
 
     def post(self, path):
-        user_date = self.request.get('date')
-        user_time = self.request.get('time')
+        if self.user_id:
+            user_date = self.request.get('date')
+            user_time = self.request.get('time')
 
-        error_raised = None
-        if user_date == '' and user_time == '':
-            user_datetime = datetime.today()
-        else:
-            try:
-                #dd.mm.yyyy hh:mm
-                user_datetime = datetime.strptime(user_date + ' ' + user_time, '%d.%m.%Y %H:%M')
-
-            except ValueError:
-                error_raised = True
-
-        if error_raised:
-            message = "Error with date/time format"
-            template_values = {'message': message}
-        else:
-            message = "Last alarm set to %s" % datetime.strftime(user_datetime, "%a, %d %b %Y %H:%M:%S")
-            template_values = {'message': message}
-
-            # all ok write to db, update cache
-            q = db.GqlQuery("SELECT * from Alarmtimestamp")
-            q = list(q)
-            if len(q) < 1:
-                new_alarm = Alarmtimestamp(alarm_datetime=user_datetime)
-                new_alarm.put()
-                memcache.set('alarm', [new_alarm])
+            error_raised = None
+            if user_date == '' and user_time == '':
+                user_datetime = datetime.today()
             else:
-                existing_alarm = q[0]
-                existing_alarm.alarm_datetime = user_datetime
-                existing_alarm.put()
-                memcache.set('alarm', [existing_alarm])
-            # update cache
+                try:
+                    #dd.mm.yyyy hh:mm
+                    user_datetime = datetime.strptime(user_date + ' ' + user_time, '%d.%m.%Y %H:%M')
 
-        self.render('reset.htm', template_values)
+                except ValueError:
+                    error_raised = True
+
+            if error_raised:
+                message = "Error with date/time format"
+                template_values = {'message': message}
+            else:
+                message = "Last alarm set to %s" % datetime.strftime(user_datetime, "%a, %d %b %Y %H:%M:%S")
+                template_values = {'message': message}
+
+                # all ok write to db, update cache
+                q = db.GqlQuery("SELECT * from Alarmtimestamp")
+                q = list(q)
+                if len(q) < 1:
+                    new_alarm = Alarmtimestamp(alarm_datetime=user_datetime)
+                    new_alarm.put()
+                    memcache.set('alarm', [new_alarm])
+                else:
+                    existing_alarm = q[0]
+                    existing_alarm.alarm_datetime = user_datetime
+                    existing_alarm.put()
+                    memcache.set('alarm', [existing_alarm])
+                # update cache
+
+            self.render('reset.htm', template_values)
+        else:
+            self.redirect("/%s/login" % path)
 
 
 class NewPage(BaseHandler):
     def get(self):
-        template_values = {"message": "New Page - GET handler"}
+        template_values = {"isAvailable": False}
         self.render('generic.htm', template_values)
 
     def Post(self):
         template_values = {"message": "New Page - POST handler"}
-        self.render('generic.htm', template_values)
+        self.render('new.htm', template_values)
 
 
 class CustomMainPage(BaseHandler):
@@ -130,8 +143,22 @@ class CustomMainPage(BaseHandler):
         template_values = {"message": "CustomMainPage - GET handler for [%s]" % path}
         self.render('generic.htm', template_values)
 
-    def Post(self, path):
+    def post(self, path):
+        user_custompath = self.request.get('custompath')
+        user_hidden_hash = self.request.get('availhash')
+
+        utils.check_custom_path_hash(user_custompath, user_hidden_hash)
         template_values = {"message": "CustomMainPage - POST handler for [%s]" % path}
+        self.render('generic.htm', template_values)
+
+
+class LoginPage(BaseHandler):
+    def get(self, path):
+        template_values = {"message": "LoginPage - GET handler for [%s]" % path}
+        self.render('generic.htm', template_values)
+
+    def post(self, path):
+        template_values = {"message": "LoginPage - GET handler for [%s]" % path}
         self.render('generic.htm', template_values)
 
 
