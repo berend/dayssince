@@ -136,12 +136,22 @@ class CustomMainPage(BaseHandler):
 
 
 class Alarmtimestamp(db.Model):
-    alarm_datetime = db.DateTimeProperty()
+    alarm_datetime = db.DateTimeProperty(required=True)
+    alarm_path = db.StringProperty(required=True)
+
+
+class CustomAlarm(db.Model):
+    alarm_path = db.StringProperty(required=True)
+    user_login = db.StringProperty(required=True)
+    user_pass = db.StringProperty(required=True)
+    user_id = db.StringProperty(required=True)
+    user_email = db.StringProperty(required=True)
 
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/new', NewPage),
                                ('/(.+)/admin', AdminPage),
+                               ('/(.+)/login', LoginPage),
                                ('/(.+)', CustomMainPage)
                                ],
                               debug=True)

@@ -1,0 +1,605 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"log",
+				"log_messages"
+			],
+			[
+				"re",
+				"revnum"
+			],
+			[
+				"lo",
+				"log_messages"
+			],
+			[
+				"templ",
+				"template_values"
+			],
+			[
+				"temp",
+				"template_values"
+			],
+			[
+				"B",
+				"Blogentry"
+			],
+			[
+				"en",
+				"entry_id"
+			],
+			[
+				"new",
+				"new_entry_id"
+			],
+			[
+				"us",
+				"user_subject"
+			],
+			[
+				"au",
+				"auto_now_add"
+			],
+			[
+				"user",
+				"user_pass"
+			],
+			[
+				"has",
+				"hash_from_db"
+			],
+			[
+				"mak",
+				"make_salt"
+			],
+			[
+				"link",
+				"link_id"
+			],
+			[
+				"email_error",
+				"email_error_found"
+			],
+			[
+				"E",
+				"EMAIL_ERRORTEXT"
+			],
+			[
+				"ver",
+				"verify_error_found"
+			],
+			[
+				"Ver",
+				"VERIFY_ERRORTEXT"
+			],
+			[
+				"pas",
+				"password_error_found"
+			],
+			[
+				"PAS",
+				"PASSWORD_ERRORTEXT"
+			],
+			[
+				"US",
+				"USERNAME_ERRORTEXT"
+			],
+			[
+				"ema",
+				"email_error_found"
+			],
+			[
+				"pass",
+				"password_error_found"
+			],
+			[
+				"EMA",
+				"EMAIL_REGEX"
+			],
+			[
+				"em",
+				"email_error"
+			],
+			[
+				"U",
+				"USERNAME_REGEX"
+			],
+			[
+				"text",
+				"textarea"
+			],
+			[
+				"val",
+				"valid_month"
+			],
+			[
+				"cap",
+				"cap_month"
+			],
+			[
+				"prim",
+				"primelist"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"pr",
+				"primes"
+			],
+			[
+				"prime",
+				"primes"
+			],
+			[
+				"squa",
+				"squarelist_dict"
+			],
+			[
+				"primes",
+				"primelist"
+			],
+			[
+				"squ",
+				"squarelist"
+			],
+			[
+				"hexa",
+				"hexa_dict"
+			],
+			[
+				"pe",
+				"pent_dict"
+			],
+			[
+				"wor",
+				"word"
+			],
+			[
+				"w",
+				"word_value"
+			],
+			[
+				"pa",
+				"pan_origin"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "main.py",
+			"settings":
+			{
+				"buffer_size": 5318,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/new.htm",
+			"settings":
+			{
+				"buffer_size": 1114,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/reset.htm",
+			"settings":
+			{
+				"buffer_size": 752,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 380.0,
+		"selected_items":
+		[
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 230.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/git/days_since/dayssince/templates/login.htm",
+		"/C/Users/berend.kapelle/Dropbox/python/optimizer/optimus.py",
+		"/C/Users/berend.kapelle/Dropbox/python/optimizer/optimizer_data.json",
+		"/U/CampusNet/tmp347943558537139.csv",
+		"/C/Applications/CampusNet/trunk/files/web/content/advisor_students.htm",
+		"/C/Users/berend.kapelle/Desktop/studierendenstatus_noch__testen.txt",
+		"/C/Applications/svn_old_versions.bat",
+		"/C/git/days_since/dayssince/templates/generic.htm",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/cs253wiki/handler.py",
+		"/C/Users/berend.kapelle/Dropbox/python/svn_connect/svn2.py",
+		"/C/Applications/svn_startup.bat",
+		"/C/Users/berend.kapelle/Dropbox/python/svn_connect/svn.py",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Flake8Lint/Default (Windows).sublime-keymap",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Flake8Lint/Flake8Lint.sublime-settings",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/User/Flake8Lint.sublime-settings",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/TrainlingSpaces/trailing_spaces.py",
+		"/C/git/days_since/dayssince/main.py",
+		"//Cn-dev400/campusnet/tmpl/campus/001/show_registration_details.htm",
+		"/C/Applications/CampusNet/4.00/local/logs/mgerror_bk.log",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/TrainlingSpaces/Default.sublime-commands",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/TrainlingSpaces/trailing_spaces.sublime-settings",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Python/Python.tmLanguage",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Python/if-__name__-==-'__main__'.sublime-snippet",
+		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Applications/kill_update_restart.bat",
+		"/C/temp/test.reg",
+		"/C/xampp/htdocs/django/docs/ref/django-admin.txt",
+		"/C/Applications/CampusNet/trunk/files/web/content/show_registration_details.htm",
+		"/C/temp/appointments.xml",
+		"/C/git/days_since/dayssince/README.markdown",
+		"/C/Python/Python27/Lib/site-packages/django/bin/django-admin.py",
+		"/C/xampp/apache/conf/httpd.conf",
+		"/C/coding_wednesday/cw19/cwblog/index.yaml",
+		"/C/coding_wednesday/cw19/cwblog/app.yaml",
+		"/C/coding_wednesday/cw19/cwblog/main.py",
+		"/C/coding_wednesday/cw19/cwblog/templates/frontpage.htm",
+		"/C/coding_wednesday/cw19/cwblog/templates/entry.htm",
+		"/C/coding_wednesday/cw19/cwblog/templates/newentry.htm",
+		"/T/Transfer/codingwed/CW18 - Cloud Programming mit AppEngine/snippet1.py",
+		"/T/Transfer/codingwed/CW18 - Cloud Programming mit AppEngine/snippet2.htm",
+		"/C/coding_wednesday/cw19/cw19.sublime-project",
+		"/C/Applications/CampusNet/trunk/files/web/content/registration.htm",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/login.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/welcome.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/main.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/templates/login.htm",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/signup.py",
+		"/C/Users/Berend/Dropbox/python/diverses/test.py",
+		"/C/Users/Berend/Dropbox/python/udacity/cs253_u5_11.py",
+		"/C/Users/berend.kapelle/Dropbox/ahk_scripts/spotify_mute.ahk",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/csblog.sublime-project",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.pyc",
+		"/C/Users/berend.kapelle/Desktop/Themen mit LKI",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix.csv",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix__.csv",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix3.csv",
+		"/C/Applications/CampusNet/trunk/local/logs/peex_srpa_include_final_grade_fix.csv",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix2.csv",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix7.csv",
+		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix8.csv",
+		"/C/Applications/CampusNet/trunk/files/web/content/lostpass.htm",
+		"/C/Applications/CampusNet/trunk/files/web/frame/master/head.htm",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/outlook logging/20120810-114127778-oof.log",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/outlook logging/berend.kapelle@datenlotsen.de.ost.log",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/outlook logging/20120810-114124959-oof.log",
+		"/C/Users/berend.kapelle/Dropbox/python/diverses/google_doodle_hurdles.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/helloworld/helloworld.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/udacity01/helloworld.py",
+		"/C/Users/berend.kapelle/Dropbox/python/udacity/c253_u3_13.py",
+		"/C/Users/berend.kapelle/Dropbox/python/udacity/c253_u3_12.py",
+		"/C/Users/berend.kapelle/Dropbox/python/udacity/c253_u3_05.py",
+		"/C/Users/berend.kapelle/Dropbox/python/python101/mpe.py",
+		"/C/Users/berend.kapelle/Dropbox/python/python101/euler.py",
+		"/C/Python/Python27/NEWS.txt",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/rot13/rot13/main.py",
+		"/C/Users/berend.kapelle/Desktop/mitarbeiter_gespräch.txt",
+		"//CN-DEV340/CampusNet/ini/user/berend.kapelle.ini",
+		"//Cn-dev400/campusnet/ini/mgrb.ini",
+		"/C/Users/berend.kapelle/Desktop/CW_termine.txt",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9389.xm-rev33012.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4712.xm-rev32832.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_5938.xm-rev32833.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2104.xm-rev32835.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2184.xm-rev32893.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9425.xm-rev32920.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_62.xm-rev33009.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2112.xm-rev33010.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2209.xm-rev33011.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9390.xml-rev33013.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4309.xml-rev32831.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2206.xml-rev32830.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2135.xml-rev32829.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9676.xml-rev32795.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2211.xml-rev32794.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9448.xml-rev32783.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_3891.xml-rev32719.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9524.xml-rev32718.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9524.xm-rev32694.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9736.xml-rev32651.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_1942.-rev32566.svn003.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9448.xml-rev32547.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9703.xml-rev32494.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9389.xml-rev33012.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2209.xml-rev33011.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2112.xml-rev33010.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_62.xml-rev33009.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9425.xml-rev32920.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_1942.xm-rev32566.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9673.xm-rev32580.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9675.xm-rev32581.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9672.xm-rev32617.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_5406.xm-rev32638.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2211.xml-rev32647.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9674.xml-rev32649.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9360.xm-rev32653.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9674.xm-rev32654.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9677.xm-rev32661.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2203.xm-rev32676.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4767.xm-rev32677.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4779.xm-rev32678.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9524.xm-rev32692.svn001.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9360.xml-rev32704.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9430.xml-rev32717.svn000.tmp.xml",
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9426.xml-rev32737.svn000.tmp.xml"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"detectIndentation",
+			"translateTabsToSpaces",
+			"flake",
+			"#",
+			"console",
+			"lostpass",
+			"6 - KEDB SP4",
+			"campus400",
+			"idle",
+			"[logginh",
+			"'",
+			"_a",
+			"REQUISITE_NAME",
+			"<div class=\"error\" title=\"",
+			"No open application term",
+			"<trans>Register",
+			"Regiser",
+			"<tns:bewertung_anzeige>nb</tns:bewertung_anzeige>",
+			"val"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"8 - KEDB SP5",
+			"campusUT",
+			"''",
+			"_b",
+			"int"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "main.py",
+					"settings":
+					{
+						"buffer_size": 5318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4965,
+								4965
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2542.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "templates/new.htm",
+					"settings":
+					{
+						"buffer_size": 1114,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1060,
+								1060
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "templates/reset.htm",
+					"settings":
+					{
+						"buffer_size": 752,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 247.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ma",
+				"main.py"
+			],
+			[
+				"log",
+				"c253blog/login.py"
+			],
+			[
+				"hand",
+				"c253blog/handler.py"
+			],
+			[
+				"",
+				"c253blog/login.py"
+			],
+			[
+				"lo",
+				"c253blog/login.py"
+			],
+			[
+				"main",
+				"main.py"
+			],
+			[
+				"handl",
+				"handler.py"
+			],
+			[
+				".htm",
+				"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/templates/login.htm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 332.0,
+	"status_bar_visible": true
+}

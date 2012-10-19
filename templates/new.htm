@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>13 days</title>
+        <link href='http://fonts.googleapis.com/css?family=Quantico' rel='stylesheet' type='text/css'>
+        <style type="text/css">
+        #content {position:absolute; top:50%; height:240px; width:100%; margin-top:-120px;text-align:center; font-family: 'Quantico', sans-serif;; font-size: 28pt}
+        </style>
+    </head>
+    <body>
+        <div id="content">
+        <form method="post">
+            Enter your custom path to your days since instance. This will be the link you make public.
+            <br><br>
+            http:\\www.yetToBeDefined.tld<input type="text" name="custompath" maxlength="20">&nbsp;&nbsp;&nbsp;(max length: 30 characters)
+            <br>
+            {% if isAvailable %}
+                <input type="submit" value="Check availability">
+                <input type="hidden" value="{{avail_hash}}"
+            {% else %}
+                {{errormessage}}
+                <input type="submit" value="Check availability">
+            {% endif %}
+            <br>
+
+        </form>
+        </div>
+    </body>
+</html>
+
+
