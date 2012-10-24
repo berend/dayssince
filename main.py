@@ -14,67 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-import webapp2
-import jinja2
+
+
 import os
-import logging
-import json
-
+# import logging
 import utils
+import webapp2
 
+from utils import BaseHandler
 from google.appengine.api import memcache
 from google.appengine.ext import db
 from datetime import datetime
 # from time import strftime
 
 
-jinja_environment = jinja2.Environment(autoescape=True,
-                                       loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')))
-
 DEBUG = os.environ['SERVER_SOFTWARE'].startswith('Developement')
 
 
-class BaseHandler(webapp2.RequestHandler):
-    def __init__(self):
-        # check cookie, set username
-        user_name_cookie = self.request.cookies.get("user_id")
-        self.user_id = utils.check_cookie(user_name_cookie)
-
-    def render(self, template_name, template_values):
-        template = jinja_environment.get_template(template_name)
-        self.response.out.write(template.render(template_values))
-
-    def render_json(self, template_values):
-        self.response.headers['Content-Type'] = "application/json; charset=UTF-8"
-        self.response.out.write(json.dumps(template_values))
-
-
-class MainHandler(BaseHandler):
+class FrontPage(BaseHandler):
     def get(self):
-        key = 'alarm'
-
-        alarms = memcache.get(key)
-
-        if alarms is None:
-            alarms = db.GqlQuery("SELECT * from Alarmtimestamp")
-
-            alarms = list(alarms)
-            logging.info('DB Query!')
-        else:
-            logging.info('Cache Hit!: %s' % alarms[0].alarm_datetime)
-
-        #still none?
-        if  len(alarms) < 1:
-            displayalarm = Alarmtimestamp(alarm_datetime=datetime.today())
-        else:
-            displayalarm = alarms[0]
-            memcache.set('alarm', alarms)
-        today = datetime.today()
-        timedelta = today - displayalarm.alarm_datetime
-
-        template_values = {'days': timedelta.days,
-                           'hours': timedelta.seconds / 3600}
-        self.render('index.htm', template_values)
+        self.render('frontpage.htm', {})
 
 
 class AdminPage(BaseHandler):
@@ -131,11 +90,49 @@ class AdminPage(BaseHandler):
 class NewPage(BaseHandler):
     def get(self):
         template_values = {"isAvailable": False}
-        self.render('generic.htm', template_values)
+        self.render('new.htm', template_values)
 
-    def Post(self):
+    def post(self):
+        user_availhash = self.request.get('availhash')
+        user_custompath = self.request.get('custompath')
+        q = db.GqlQuery("SELECT * from Alarmtimestamp")
+        q = list(q)
         template_values = {"message": "New Page - POST handler"}
         self.render('new.htm', template_values)
+
+
+class NewUser(BaseHandler):
+    def get(self):
+        template_values = {"submit_error": False}
+        self.render('newuser.htm', template_values)
+
+    def post(self):
+        user_login = self.request.get('login')
+        user_yourname = self.request.get('yourname')
+        user_password = self.request.get('password')
+        user_password_repeat = self.request.get('password_repeat')
+        user_email = self.request.get('email')
+
+        if user_password != user_password_repeat:
+            template_values = {"error_message": "Passwords don't match!", "submit_error": True}
+            self.render('newuser.htm', template_values)
+        elif user_password == "":
+            template_values = {"error_message": "Passwords are empty!", "submit_error": True}
+            self.render('newuser.htm', template_values)
+        elif User.get_by_key_name(user_login):
+            template_values = {"error_message": "Username is already taken!", "submit_error": True}
+            self.render('newuser.htm', template_values)
+        else:
+            #no error, create new user!
+            pw_hash = utils.hash_pw_for_db(user_password)
+            user_cookie = utils.make_cookie(user_login)
+
+            new_user = User(key_name=user_login, yourname=user_yourname, password=pw_hash, email=user_email)
+            new_user.put()
+
+            #login new user by creating cookie and display sucess web page
+            self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % str(user_cookie))
+            self.render('new_user_created.htm', {})
 
 
 class CustomMainPage(BaseHandler):
@@ -169,14 +166,17 @@ class Alarmtimestamp(db.Model):
 
 class CustomAlarm(db.Model):
     alarm_path = db.StringProperty(required=True)
-    user_login = db.StringProperty(required=True)
-    user_pass = db.StringProperty(required=True)
-    user_id = db.StringProperty(required=True)
-    user_email = db.StringProperty(required=True)
 
 
-app = webapp2.WSGIApplication([('/', MainHandler),
+class User(db.Model):
+    #user_login is going into the key, when creating and referencing users
+    yourname = db.StringProperty(required=True)
+    password = db.StringProperty(required=True)
+    email = db.StringProperty()
+
+app = webapp2.WSGIApplication([('/', FrontPage),
                                ('/new', NewPage),
+                               ('/newuser', NewUser),
                                ('/(.+)/admin', AdminPage),
                                ('/(.+)/login', LoginPage),
                                ('/(.+)', CustomMainPage)

@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"user",
+				"user_id"
+			],
+			[
+				"try",
+				"try	Try/Except"
+			],
+			[
 				"log",
 				"log_messages"
 			],
@@ -42,10 +50,6 @@
 			[
 				"au",
 				"auto_now_add"
-			],
-			[
-				"user",
-				"user_pass"
 			],
 			[
 				"has",
@@ -175,23 +179,23 @@
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 5318,
+				"buffer_size": 6341,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/new.htm",
+			"file": "utils.py",
 			"settings":
 			{
-				"buffer_size": 1114,
+				"buffer_size": 840,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/reset.htm",
+			"file": "samples/inherit.py",
 			"settings":
 			{
-				"buffer_size": 752,
+				"buffer_size": 66,
 				"line_ending": "Windows"
 			}
 		}
@@ -199,7 +203,7 @@
 	"build_system": "Packages/Python/Python.sublime-build",
 	"command_palette":
 	{
-		"height": 380.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
@@ -215,7 +219,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 536.0
 	},
 	"console":
 	{
@@ -233,6 +237,13 @@
 	"file_history":
 	[
 		"/C/git/days_since/dayssince/templates/login.htm",
+		"/C/git/days_since/dayssince/templates/reset.htm",
+		"/C/git/days_since/dayssince/templates/new.htm",
+		"/C/git/days_since/dayssince/utils.py",
+		"/C/git/days_since/dayssince/main.py",
+		"/C/git/days_since/dayssince/samples/inherit.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.py",
+		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.pyc",
 		"/C/Users/berend.kapelle/Dropbox/python/optimizer/optimus.py",
 		"/C/Users/berend.kapelle/Dropbox/python/optimizer/optimizer_data.json",
 		"/U/CampusNet/tmp347943558537139.csv",
@@ -250,7 +261,6 @@
 		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/User/Flake8Lint.sublime-settings",
 		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
 		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/TrainlingSpaces/trailing_spaces.py",
-		"/C/git/days_since/dayssince/main.py",
 		"//Cn-dev400/campusnet/tmpl/campus/001/show_registration_details.htm",
 		"/C/Applications/CampusNet/4.00/local/logs/mgerror_bk.log",
 		"/C/Users/berend.kapelle/AppData/Roaming/Sublime Text 2/Packages/TrainlingSpaces/Default.sublime-commands",
@@ -281,13 +291,11 @@
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/welcome.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/main.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/templates/login.htm",
-		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/signup.py",
 		"/C/Users/Berend/Dropbox/python/diverses/test.py",
 		"/C/Users/Berend/Dropbox/python/udacity/cs253_u5_11.py",
 		"/C/Users/berend.kapelle/Dropbox/ahk_scripts/spotify_mute.ahk",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/csblog.sublime-project",
-		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.pyc",
 		"/C/Users/berend.kapelle/Desktop/Themen mit LKI",
 		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix.csv",
 		"/C/Applications/CampusNet/4.00/local/logs/peex_srpa_include_final_grade_fix__.csv",
@@ -355,11 +363,7 @@
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9677.xm-rev32661.svn001.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2203.xm-rev32676.svn001.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4767.xm-rev32677.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4779.xm-rev32678.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9524.xm-rev32692.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9360.xml-rev32704.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9430.xml-rev32717.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9426.xml-rev32737.svn000.tmp.xml"
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4779.xm-rev32678.svn001.tmp.xml"
 	],
 	"find":
 	{
@@ -418,7 +422,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -426,15 +430,15 @@
 					"file": "main.py",
 					"settings":
 					{
-						"buffer_size": 5318,
+						"buffer_size": 6341,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4965,
-								4965
+								2503,
+								2503
 							]
 						],
 						"settings":
@@ -444,32 +448,30 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2542.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "templates/new.htm",
+					"file": "utils.py",
 					"settings":
 					{
-						"buffer_size": 1114,
+						"buffer_size": 840,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1060,
-								1060
+								132,
+								144
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -479,23 +481,23 @@
 				},
 				{
 					"buffer": 2,
-					"file": "templates/reset.htm",
+					"file": "samples/inherit.py",
 					"settings":
 					{
-						"buffer_size": 752,
+						"buffer_size": 66,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								17,
+								17
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
