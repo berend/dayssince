@@ -37,15 +37,15 @@ class FrontPage(BaseHandler):
 
 
 class AdminPage(BaseHandler):
-    def get(self, path):
+    def get(self):
         if self.user_id:
             message = "Leave empty to set to (now)"
             template_values = {"message": message}
             self.render('reset.htm', template_values)
         else:
-            self.redirect("/%s/login" % path)
+            self.redirect("/login")
 
-    def post(self, path):
+    def post(self):
         if self.user_id:
             user_date = self.request.get('date')
             user_time = self.request.get('time')
@@ -84,21 +84,27 @@ class AdminPage(BaseHandler):
 
             self.render('reset.htm', template_values)
         else:
-            self.redirect("/%s/login" % path)
+            self.redirect("/login")
 
 
 class NewPage(BaseHandler):
     def get(self):
-        template_values = {"isAvailable": False}
-        self.render('new.htm', template_values)
+        if self.user_id:
+            template_values = {"isAvailable": False}
+            self.render('new.htm', template_values)
+        else:
+            self.redirect("/login")
 
     def post(self):
-        user_availhash = self.request.get('availhash')
-        user_custompath = self.request.get('custompath')
-        q = db.GqlQuery("SELECT * from Alarmtimestamp")
-        q = list(q)
-        template_values = {"message": "New Page - POST handler"}
-        self.render('new.htm', template_values)
+        if self.user_id:
+            user_availhash = self.request.get('availhash')
+            user_custompath = self.request.get('custompath')
+            q = db.GqlQuery("SELECT * from Alarmtimestamp")
+            q = list(q)
+            template_values = {"message": "New Page - POST handler"}
+            self.render('new.htm', template_values)
+        else:
+            self.redirect("/login")
 
 
 class NewUser(BaseHandler):
@@ -150,13 +156,26 @@ class CustomMainPage(BaseHandler):
 
 
 class LoginPage(BaseHandler):
-    def get(self, path):
-        template_values = {"message": "LoginPage - GET handler for [%s]" % path}
-        self.render('generic.htm', template_values)
+    def get(self):
+        self.render('login.htm', {})
 
-    def post(self, path):
-        template_values = {"message": "LoginPage - GET handler for [%s]" % path}
-        self.render('generic.htm', template_values)
+    def post(self):
+        user_username = self.request.get('custompath')
+        user_password = self.request.get('password')
+        loginuser = User.get_by_key_name(user_username)
+        if loginuser:
+            hashed_pw = loginuser.password
+        else:
+            hashed_pw = ""
+
+        if not(loginuser) or not(utils.check_pw(hashed_pw, user_password)):
+            # username does not exist or wrong password
+            template_values = {"message": "Wrong username or password false!"}
+            self.render('login.htm', template_values)
+        else:
+            #login by cookie setting and redirecting to this users admin page
+            user_cookie = utils.make_cookie(user_username)
+            self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % str(user_cookie))
 
 
 class Alarmtimestamp(db.Model):
@@ -177,8 +196,8 @@ class User(db.Model):
 app = webapp2.WSGIApplication([('/', FrontPage),
                                ('/new', NewPage),
                                ('/newuser', NewUser),
-                               ('/(.+)/admin', AdminPage),
-                               ('/(.+)/login', LoginPage),
+                               ('/admin', AdminPage),
+                               ('/login', LoginPage),
                                ('/(.+)', CustomMainPage)
                                ],
                               debug=True)

@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"ch",
+				"check_pw  (function)"
+			],
+			[
+				"make",
+				"make_hash"
+			],
+			[
+				"login",
+				"loginuser"
+			],
+			[
+				"us",
+				"username"
+			],
+			[
+				"user_",
+				"user_password"
+			],
+			[
+				"password",
+				"password"
+			],
+			[
 				"user",
 				"user_id"
 			],
@@ -42,10 +66,6 @@
 			[
 				"new",
 				"new_entry_id"
-			],
-			[
-				"us",
-				"user_subject"
 			],
 			[
 				"au",
@@ -176,10 +196,18 @@
 	"buffers":
 	[
 		{
+			"file": "templates/newuser.htm",
+			"settings":
+			{
+				"buffer_size": 607,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 6341,
+				"buffer_size": 7336,
 				"line_ending": "Windows"
 			}
 		},
@@ -187,15 +215,39 @@
 			"file": "utils.py",
 			"settings":
 			{
-				"buffer_size": 840,
+				"buffer_size": 2413,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "samples/inherit.py",
+			"file": "templates/new_user_created.htm",
 			"settings":
 			{
-				"buffer_size": 66,
+				"buffer_size": 288,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/new.htm",
+			"settings":
+			{
+				"buffer_size": 807,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/frontpage.htm",
+			"settings":
+			{
+				"buffer_size": 534,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/login.htm",
+			"settings":
+			{
+				"buffer_size": 457,
 				"line_ending": "Windows"
 			}
 		}
@@ -236,12 +288,21 @@
 	},
 	"file_history":
 	[
-		"/C/git/days_since/dayssince/templates/login.htm",
 		"/C/git/days_since/dayssince/templates/reset.htm",
 		"/C/git/days_since/dayssince/templates/new.htm",
+		"/C/git/days_since/dayssince/templates/login.htm",
+		"/C/git/days_since/dayssince/templates/index.htm",
+		"/C/git/days_since/dayssince/templates/generic.htm",
+		"/C/git/days_since/dayssince/templates/frontpage.htm",
 		"/C/git/days_since/dayssince/utils.py",
 		"/C/git/days_since/dayssince/main.py",
+		"/C/Applications/CampusNet/trunk/src2/CampusNet/Source/Prg_3487.xml",
+		"//Cn-dev/campusnet/www/scripts/crypto.dll",
+		"/C/Applications/CampusNet/trunk/src2/CampusNet/Source/Prg_1949.xml",
+		"/C/Applications/CampusNet/trunk/files/web/content/registration.htm",
+		"/C/Applications/CampusNet/trunk/files/web/content/reg_exam_details.htm",
 		"/C/git/days_since/dayssince/samples/inherit.py",
+		"/C/Applications/CampusNet/trunk/src2/CampusNet/Source/Prg_1973.xml",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/handler.pyc",
 		"/C/Users/berend.kapelle/Dropbox/python/optimizer/optimus.py",
@@ -250,7 +311,6 @@
 		"/C/Applications/CampusNet/trunk/files/web/content/advisor_students.htm",
 		"/C/Users/berend.kapelle/Desktop/studierendenstatus_noch__testen.txt",
 		"/C/Applications/svn_old_versions.bat",
-		"/C/git/days_since/dayssince/templates/generic.htm",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/cs253wiki/handler.py",
 		"/C/Users/berend.kapelle/Dropbox/python/svn_connect/svn2.py",
 		"/C/Applications/svn_startup.bat",
@@ -286,7 +346,6 @@
 		"/T/Transfer/codingwed/CW18 - Cloud Programming mit AppEngine/snippet1.py",
 		"/T/Transfer/codingwed/CW18 - Cloud Programming mit AppEngine/snippet2.htm",
 		"/C/coding_wednesday/cw19/cw19.sublime-project",
-		"/C/Applications/CampusNet/trunk/files/web/content/registration.htm",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/login.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/welcome.py",
 		"/C/Users/berend.kapelle/Dropbox/python/appengine/c253blog/main.py",
@@ -356,14 +415,7 @@
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9675.xm-rev32581.svn001.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9672.xm-rev32617.svn001.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_5406.xm-rev32638.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2211.xml-rev32647.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9674.xml-rev32649.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9360.xm-rev32653.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9674.xm-rev32654.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9677.xm-rev32661.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2203.xm-rev32676.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4767.xm-rev32677.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_4779.xm-rev32678.svn001.tmp.xml"
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2211.xml-rev32647.svn000.tmp.xml"
 	],
 	"find":
 	{
@@ -381,6 +433,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"crypto",
+			"MainHandler",
 			"detectIndentation",
 			"translateTabsToSpaces",
 			"flake",
@@ -422,23 +476,51 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "main.py",
+					"file": "templates/newuser.htm",
 					"settings":
 					{
-						"buffer_size": 6341,
+						"buffer_size": 607,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2503,
-								2503
+								607,
+								607
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "main.py",
+					"settings":
+					{
+						"buffer_size": 7336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3166,
+								3166
 							]
 						],
 						"settings":
@@ -448,30 +530,58 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 1506.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "utils.py",
 					"settings":
 					{
-						"buffer_size": 840,
+						"buffer_size": 2413,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								132,
-								144
+								1016,
+								1016
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 137.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "templates/new_user_created.htm",
+					"settings":
+					{
+						"buffer_size": 288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								288,
+								288
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -480,24 +590,80 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "samples/inherit.py",
+					"buffer": 4,
+					"file": "templates/new.htm",
 					"settings":
 					{
-						"buffer_size": 66,
+						"buffer_size": 807,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17,
-								17
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/frontpage.htm",
+					"settings":
+					{
+						"buffer_size": 534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								444,
+								444
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/login.htm",
+					"settings":
+					{
+						"buffer_size": 457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								213,
+								213
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -556,6 +722,10 @@
 		"selected_items":
 		[
 			[
+				"main",
+				"main.py"
+			],
+			[
 				"ma",
 				"main.py"
 			],
@@ -574,10 +744,6 @@
 			[
 				"lo",
 				"c253blog/login.py"
-			],
-			[
-				"main",
-				"main.py"
 			],
 			[
 				"handl",
@@ -602,6 +768,6 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 332.0,
+	"side_bar_width": 223.0,
 	"status_bar_visible": true
 }
