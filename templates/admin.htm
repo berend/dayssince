@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Days since</title>
+    </head>
+    <body>
+        <div id="content">
+            {{message}}<br>
+            Click <a href="/new">here</a> for a new alarm!<br>
+
+            {% if has_any_alarms %}
+            {% for alarm in alarms%}
+            <ul class="alarmlist">
+                <li>{{alarm.alarm_name}}, <span class="path">{{alarm.alarm_custom_path}}</span> <a href="{{alarm.alarm_custom_path}}/admin">edit</a>&nbsp;<a href="{{alarm.alarm_custom_path}}/delete">delete</a>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </body>
+</html>
+
+

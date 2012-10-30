@@ -37,7 +37,10 @@ def check_pw(pw_from_db, pw_from_user):
     except ValueError:
         # when splitting fails, someone must have changed the pw, so check fails
         return None
-    return  h == make_pw_hash(pw_from_user, salt)
+
+    new_hash = make_pw_hash(pw_from_user, salt)
+    logging.info("%s \n %s" % (pw_from_db, new_hash))
+    return  pw_from_db == new_hash
 
 
 def make_salt():

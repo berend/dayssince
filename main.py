@@ -17,7 +17,7 @@
 
 
 import os
-# import logging
+import logging
 import utils
 import webapp2
 
@@ -36,8 +36,9 @@ class FrontPage(BaseHandler):
         self.render('frontpage.htm', {})
 
 
-class AdminPage(BaseHandler):
+class AdminPage_old(BaseHandler):
     def get(self):
+        logging.info("user_id: %s" % self.user_id)
         if self.user_id:
             message = "Leave empty to set to (now)"
             template_values = {"message": message}
@@ -160,9 +161,15 @@ class LoginPage(BaseHandler):
         self.render('login.htm', {})
 
     def post(self):
-        user_username = self.request.get('custompath')
+        user_username = self.request.get('username')
         user_password = self.request.get('password')
-        loginuser = User.get_by_key_name(user_username)
+        # logging.info("username: %s" % user_username)
+        if user_username:
+            loginuser = User.get_by_key_name(user_username)
+
+        else:
+            loginuser = None
+
         if loginuser:
             hashed_pw = loginuser.password
         else:
@@ -176,6 +183,7 @@ class LoginPage(BaseHandler):
             #login by cookie setting and redirecting to this users admin page
             user_cookie = utils.make_cookie(user_username)
             self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % str(user_cookie))
+            self.redirect("/admin")
 
 
 class Alarmtimestamp(db.Model):
@@ -184,14 +192,18 @@ class Alarmtimestamp(db.Model):
 
 
 class CustomAlarm(db.Model):
-    alarm_path = db.StringProperty(required=True)
+    # custom path is the key for creating and referencing
+    alarm_custom_path = db.StringProperty(required=True)
+    alarm_name = db.StringProperty(required=True)
+    created = db.DateTimeProperty(auto_now_add = True)
 
 
 class User(db.Model):
-    #user_login is going into the key, when creating and referencing users
+    #user_login is the key, when creating and referencing users
     yourname = db.StringProperty(required=True)
     password = db.StringProperty(required=True)
     email = db.StringProperty()
+    created = db.DateTimeProperty(auto_now_add = True)
 
 app = webapp2.WSGIApplication([('/', FrontPage),
                                ('/new', NewPage),
