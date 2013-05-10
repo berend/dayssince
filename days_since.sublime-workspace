@@ -196,34 +196,21 @@
 	"buffers":
 	[
 		{
-			"file": "templates/newuser.htm",
-			"settings":
-			{
-				"buffer_size": 607,
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "#!/usr/bin/env python\n#\n# Copyright 2007 Google Inc.\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#     http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n\n\nimport os\nimport logging\nimport utils\nimport webapp2\n\nfrom utils import BaseHandler\nfrom google.appengine.api import memcache\nfrom google.appengine.ext import db\nfrom datetime import datetime\n# from time import strftime\n\n\nDEBUG = os.environ['SERVER_SOFTWARE'].startswith('Developement')\n\n\nclass FrontPage(BaseHandler):\n    def get(self):\n        self.render('frontpage.htm', {})\n\n\nclass AdminPage(BaseHandler):\n    def get(self):\n        q = db.GqlQuery(\"SELECT * from CustomAlarm ORDER BY created DESC\")\n        alarms = list(q)\n        template_values = {\"has_any_alarms\": len(alarms)>=1,\n                           \"alarms\": alarms}\n        self.render('admin.htm', template_values)\n\n\nclass AdminPage_old(BaseHandler):\n    def get(self):\n        logging.info(\"user_id: %s\" % self.user_id)\n        if self.user_id:\n            message = \"Leave empty to set to (now)\"\n            template_values = {\"message\": message}\n            self.render('reset.htm', template_values)\n        else:\n            self.redirect(\"/login\")\n\n    def post(self):\n        if self.user_id:\n            user_date = self.request.get('date')\n            user_time = self.request.get('time')\n\n            error_raised = None\n            if user_date == '' and user_time == '':\n                user_datetime = datetime.today()\n            else:\n                try:\n                    #dd.mm.yyyy hh:mm\n                    user_datetime = datetime.strptime(user_date + ' ' + user_time, '%d.%m.%Y %H:%M')\n\n                except ValueError:\n                    error_raised = True\n\n            if error_raised:\n                message = \"Error with date/time format\"\n                template_values = {'message': message}\n            else:\n                message = \"Last alarm set to %s\" % datetime.strftime(user_datetime, \"%a, %d %b %Y %H:%M:%S\")\n                template_values = {'message': message}\n\n                # all ok write to db, update cache\n                q = db.GqlQuery(\"SELECT * from Alarmtimestamp\")\n                q = list(q)\n                if len(q) < 1:\n                    new_alarm = Alarmtimestamp(alarm_datetime=user_datetime)\n                    new_alarm.put()\n                    memcache.set('alarm', [new_alarm])\n                else:\n                    existing_alarm = q[0]\n                    existing_alarm.alarm_datetime = user_datetime\n                    existing_alarm.put()\n                    memcache.set('alarm', [existing_alarm])\n                # update cache\n\n            self.render('reset.htm', template_values)\n        else:\n            self.redirect(\"/login\")\n\n\nclass NewPage(BaseHandler):\n    def get(self):\n        if self.user_id:\n            template_values = {\"isAvailable\": False}\n            self.render('new.htm', template_values)\n        else:\n            self.redirect(\"/login\")\n\n    def post(self):\n        if self.user_id:\n            user_availhash = self.request.get('availhash')\n            user_custompath = self.request.get('custompath')\n            alarms_exists = CustomAlarm.get_by_key_name('custompath')\n            if alarms_exists:\n                template_values = {\"message\": \"This url is already taken!\",\n                                   \"isAvailable\": False}\n                self.render('new.htm', template_values)\n            else:\n                # check availhash, if good\n                template_values = {\"message\": \"This url is free!\",\n                                   \"isAvailable\": True}\n        else:\n            self.redirect(\"/login\")\n\n\nclass NewUser(BaseHandler):\n    def get(self):\n        template_values = {\"submit_error\": False}\n        self.render('newuser.htm', template_values)\n\n    def post(self):\n        user_login = self.request.get('login')\n        user_yourname = self.request.get('yourname')\n        user_password = self.request.get('password')\n        user_password_repeat = self.request.get('password_repeat')\n        user_email = self.request.get('email')\n\n        if user_password != user_password_repeat:\n            template_values = {\"error_message\": \"Passwords don't match!\", \"submit_error\": True}\n            self.render('newuser.htm', template_values)\n        elif user_password == \"\":\n            template_values = {\"error_message\": \"Passwords are empty!\", \"submit_error\": True}\n            self.render('newuser.htm', template_values)\n        elif User.get_by_key_name(user_login):\n            template_values = {\"error_message\": \"Username is already taken!\", \"submit_error\": True}\n            self.render('newuser.htm', template_values)\n        else:\n            #no error, create new user!\n            pw_hash = utils.hash_pw_for_db(user_password)\n            user_cookie = utils.make_cookie(user_login)\n\n            new_user = User(key_name=user_login, yourname=user_yourname, password=pw_hash, email=user_email)\n            new_user.put()\n\n            #login new user by creating cookie and display sucess web page\n            self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % str(user_cookie))\n            self.render('new_user_created.htm', {})\n\n\nclass CustomMainPage(BaseHandler):\n    def get(self, path):\n        template_values = {\"message\": \"CustomMainPage - GET handler for [%s]\" % path}\n        self.render('generic.htm', template_values)\n\n    def post(self, path):\n        user_custompath = self.request.get('custompath')\n        user_hidden_hash = self.request.get('availhash')\n\n        utils.check_custom_path_hash(user_custompath, user_hidden_hash)\n        template_values = {\"message\": \"CustomMainPage - POST handler for [%s]\" % path}\n        self.render('generic.htm', template_values)\n\n\nclass LoginPage(BaseHandler):\n    def get(self):\n        self.render('login.htm', {})\n\n    def post(self):\n        user_username = self.request.get('username')\n        user_password = self.request.get('password')\n        # logging.info(\"username: %s\" % user_username)\n        if user_username:\n            loginuser = User.get_by_key_name(user_username)\n\n        else:\n            loginuser = None\n\n        if loginuser:\n            hashed_pw = loginuser.password\n        else:\n            hashed_pw = \"\"\n\n        if not(loginuser) or not(utils.check_pw(hashed_pw, user_password)):\n            # username does not exist or wrong password\n            template_values = {\"message\": \"Wrong username or password false!\"}\n            self.render('login.htm', template_values)\n        else:\n            #login by cookie setting and redirecting to this users admin page\n            user_cookie = utils.make_cookie(user_username)\n            self.response.headers.add_header('Set-Cookie', 'user_id=%s; Path=/' % str(user_cookie))\n            self.redirect(\"/admin\")\n\n\nclass Alarmtimestamp(db.Model):\n    alarm_datetime = db.DateTimeProperty(required=True)\n    alarm_path = db.StringProperty(required=True)\n\n\nclass CustomAlarm(db.Model):\n    # custom path is the key for creating and referencing\n    alarm_custom_path = db.StringProperty(required=True)\n    alarm_name = db.StringProperty(required=True)\n    created = db.DateTimeProperty(auto_now_add = True)\n\n\nclass User(db.Model):\n    #user_login is the key, when creating and referencing users\n    yourname = db.StringProperty(required=True)\n    password = db.StringProperty(required=True)\n    email = db.StringProperty()\n    created = db.DateTimeProperty(auto_now_add = True)\n\napp = webapp2.WSGIApplication([('/', FrontPage),\n                               ('/new', NewPage),\n                               ('/newuser', NewUser),\n                               ('/admin', AdminPage),\n                               ('/login', LoginPage),\n                               ('/(.+)', CustomMainPage)\n                               ],\n                              debug=True)\n",
 			"file": "main.py",
+			"file_size": 8298,
+			"file_write_time": 129960909297209546,
 			"settings":
 			{
-				"buffer_size": 7336,
+				"buffer_size": 8342,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "utils.py",
+			"file": "templates/admin.htm",
 			"settings":
 			{
-				"buffer_size": 2413,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/new_user_created.htm",
-			"settings":
-			{
-				"buffer_size": 288,
+				"buffer_size": 615,
 				"line_ending": "Windows"
 			}
 		},
@@ -232,22 +219,6 @@
 			"settings":
 			{
 				"buffer_size": 807,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/frontpage.htm",
-			"settings":
-			{
-				"buffer_size": 534,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/login.htm",
-			"settings":
-			{
-				"buffer_size": 457,
 				"line_ending": "Windows"
 			}
 		}
@@ -288,14 +259,23 @@
 	},
 	"file_history":
 	[
-		"/C/git/days_since/dayssince/templates/reset.htm",
+		"/C/git/days_since/dayssince/.gitignore",
+		"/C/temp/dump.xml",
+		"/C/temp/dumpb.xml",
+		"/C/Program Files (x86)/FreeMind/Freemind.bat",
+		"/C/Applications2/CampusNet/trunk_kopie/src/CampusNet/Source/Prg_3505.xml",
+		"/C/temp/dumpb.txt",
+		"/C/git/days_since/dayssince/templates/newuser.htm",
+		"/C/git/days_since/dayssince/main.py",
+		"/C/temp/dump.txt",
+		"/C/git/days_since/dayssince/utils.py",
+		"/C/git/days_since/dayssince/templates/new_user_created.htm",
 		"/C/git/days_since/dayssince/templates/new.htm",
+		"/C/git/days_since/dayssince/templates/frontpage.htm",
 		"/C/git/days_since/dayssince/templates/login.htm",
+		"/C/git/days_since/dayssince/templates/reset.htm",
 		"/C/git/days_since/dayssince/templates/index.htm",
 		"/C/git/days_since/dayssince/templates/generic.htm",
-		"/C/git/days_since/dayssince/templates/frontpage.htm",
-		"/C/git/days_since/dayssince/utils.py",
-		"/C/git/days_since/dayssince/main.py",
 		"/C/Applications/CampusNet/trunk/src2/CampusNet/Source/Prg_3487.xml",
 		"//Cn-dev/campusnet/www/scripts/crypto.dll",
 		"/C/Applications/CampusNet/trunk/src2/CampusNet/Source/Prg_1949.xml",
@@ -406,16 +386,7 @@
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9448.xml-rev32547.svn000.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9703.xml-rev32494.svn000.tmp.xml",
 		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9389.xml-rev33012.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2209.xml-rev33011.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2112.xml-rev33010.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_62.xml-rev33009.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9425.xml-rev32920.svn000.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_1942.xm-rev32566.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9673.xm-rev32580.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9675.xm-rev32581.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_9672.xm-rev32617.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_5406.xm-rev32638.svn001.tmp.xml",
-		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2211.xml-rev32647.svn000.tmp.xml"
+		"/C/Users/berend.kapelle/AppData/Local/Temp/Prg_2209.xml-rev33011.svn000.tmp.xml"
 	],
 	"find":
 	{
@@ -433,6 +404,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"eclipse",
 			"crypto",
 			"MainHandler",
 			"detectIndentation",
@@ -476,23 +448,51 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "templates/newuser.htm",
+					"file": "main.py",
 					"settings":
 					{
-						"buffer_size": 607,
+						"buffer_size": 8342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								607,
-								607
+								3622,
+								3622
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 780.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "templates/admin.htm",
+					"settings":
+					{
+						"buffer_size": 615,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								274,
+								280
 							]
 						],
 						"settings":
@@ -508,89 +508,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "main.py",
-					"settings":
-					{
-						"buffer_size": 7336,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3166,
-								3166
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1506.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 2,
-					"file": "utils.py",
-					"settings":
-					{
-						"buffer_size": 2413,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1016,
-								1016
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 137.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "templates/new_user_created.htm",
-					"settings":
-					{
-						"buffer_size": 288,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								288,
-								288
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "templates/new.htm",
 					"settings":
 					{
@@ -601,64 +519,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "templates/frontpage.htm",
-					"settings":
-					{
-						"buffer_size": 534,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								444,
-								444
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "templates/login.htm",
-					"settings":
-					{
-						"buffer_size": 457,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								213,
-								213
+								445,
+								456
 							]
 						],
 						"settings":

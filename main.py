@@ -36,6 +36,15 @@ class FrontPage(BaseHandler):
         self.render('frontpage.htm', {})
 
 
+class AdminPage(BaseHandler):
+    def get(self):
+        q = db.GqlQuery("SELECT * from CustomAlarm ORDER BY created DESC")
+        alarms = list(q)
+        template_values = {"has_any_alarms": len(alarms)>=1,
+                           "alarms": alarms}
+        self.render('admin.htm', template_values)
+
+
 class AdminPage_old(BaseHandler):
     def get(self):
         logging.info("user_id: %s" % self.user_id)
