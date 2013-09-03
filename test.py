@@ -1,7 +1,5 @@
-import pprint
+from datetime import datetime
 
-pp = pprint.PrettyPrinter(indent=4)
-alarms=[ 1 , 2, 3]
-log_String = pp.pprint(alarms)
+now = datetime.utcnow()
 
-print log_String
+print now.tzinfo.utcoffset(1)

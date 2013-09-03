@@ -109,6 +109,10 @@ class Resestpage(webapp2.RequestHandler):
     def post(self):
         user_date = self.request.get('date')
         user_time = self.request.get('time')
+        user_utc_offset = self.request.get('utc_offset')
+
+        # usre_utc_offset format is like this UTC-04
+        utc_offset = int(user_utc_offset])
 
         error_raised = None
         if user_date == '' and user_time == '':
