@@ -101,8 +101,15 @@ class Resestpage(webapp2.RequestHandler):
     def get(self):
         message = "Leave empty to set to (now)"
         alarms = memcache.get('alarms')
-        template_values = {'message': message,
-                           'alarms': alarms}
+
+        if not alarms:
+            template_values = {'message': message,
+                               'alarms': [],
+                               'show_dates': False}
+        else:
+            template_values = {'message': message,
+                               'alarms': alarms}
+
         template = jinja_environment.get_template('reset.htm')
         self.response.out.write(template.render(template_values))
 
@@ -111,8 +118,8 @@ class Resestpage(webapp2.RequestHandler):
         user_time = self.request.get('time')
         user_utc_offset = self.request.get('utc_offset')
 
-        # usre_utc_offset format is like this UTC-04
-        utc_offset = int(user_utc_offset])
+        # user_utc_offset format is like this UTC-04
+        utc_offset = int(user_utc_offset[3:])
 
         error_raised = None
         if user_date == '' and user_time == '':

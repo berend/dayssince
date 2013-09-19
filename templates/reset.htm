@@ -60,12 +60,16 @@
                 </tr>
             </table>
         </form>
+        {% if show_dates %}
         <ul>
             {% for item in alarms %}
             <li>{{item.alarm_datetime}}</li>
             {% endfor %}
             
         </ul>
+        {% else %}
+            <pre>No dates found.</pre>
+        {% endif %}
 
         </div>
     </body>
