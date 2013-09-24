@@ -19,11 +19,13 @@ import jinja2
 import os
 # import logging
 import pprint
-
+import logging
 from google.appengine.api import memcache
 from google.appengine.ext import db
 from datetime import datetime
 from datetime import timedelta
+from util import createAlarm
+from models import Alarmtimestamp
 
 filep = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_environment = jinja2.Environment(autoescape=True,
@@ -104,10 +106,10 @@ class Resestpage(webapp2.RequestHandler):
 
         if not alarms:
             template_values = {'message': message,
-                               'alarms': [],
                                'show_dates': False}
         else:
             template_values = {'message': message,
+                               'show_dates': True,
                                'alarms': alarms}
 
         template = jinja_environment.get_template('reset.htm')
@@ -121,50 +123,35 @@ class Resestpage(webapp2.RequestHandler):
         # user_utc_offset format is like this UTC-04
         utc_offset = int(user_utc_offset[3:])
 
-        error_raised = None
-        if user_date == '' and user_time == '':
-            user_datetime = datetime.today()
-        else:
-            try:
-                #dd.mm.yyyy hh:mm
-                user_datetime = datetime.strptime(user_date +
-                                                  ' ' +
-                                                  user_time,
-                                                  '%d.%m.%Y %H:%M')
 
-            except ValueError:
-                error_raised = True
+        #create new Alarm:
+        new_alarm = createAlarm(user_date, user_time, user_utc_offset)
 
-        if error_raised:
-            message = "Error with date/time format"
+
+        message = "Last alarm set to %s" % new_alarm
+        logging.info(new_alarm)
+
+        new_alarm.put()
+
+        #update cache
+        alarms = memcache.get('alarms')
+        if alarms:
+            alarms.append(new_alarm)
 
         else:
-            message = "Last alarm set to %s" % datetime.strftime(user_datetime,
-                      "%a, %d %b %Y %H:%M:%S")
+            alarms = [new_alarm]
 
-            #write new alarm into db
-            new_alarm = Alarmtimestamp(alarm_datetime=user_datetime)
-            new_alarm.put()
+        memcache.set('alarms', alarms)
 
-            #update cache
-            alarms = memcache.get('alarms')
-
-            if len(alarms) < 1:
-                memcache.set('alarms', [new_alarm])
-            else:
-                alarms.append(new_alarm)
-                memcache.set('alarms', alarms)
-
-        # logging.info('alarms: %s' % pp.pformat(alarms))
+        logging.info('alarms: %s' % pp.pformat(alarms))
         template_values = {'message': message,
+                           'show_dates': True,
                            'alarms': alarms}
         template = jinja_environment.get_template('reset.htm')
         self.response.out.write(template.render(template_values))
 
 
-class Alarmtimestamp(db.Model):
-    alarm_datetime = db.DateTimeProperty()
-    prev_alarm = db.DateTimeProperty()
+
 
 app = webapp2.WSGIApplication([('/', MainHandler),
                                ('/secretresetpage', Resestpage)],

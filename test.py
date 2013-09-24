@@ -1,5 +1,5 @@
 from datetime import datetime
 
-now = datetime.utcnow()
+now = datetime.today()
 
-print now.tzinfo.utcoffset(1)
+print now

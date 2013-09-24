@@ -4,7 +4,9 @@
         <title>13 days</title>
         <link href='http://fonts.googleapis.com/css?family=Quantico' rel='stylesheet' type='text/css'>
         <style type="text/css">
-        #content {position:absolute; top:50%; height:240px; width:100%; margin-top:-120px;text-align:center; font-family: 'Quantico', sans-serif;; font-size: 14pt}
+        #content {position:absolute;                  top:50%;                  height:240px;                  width:100%;                  margin-top:-120px;text-align:center; font-family: 'Quantico', sans-serif;; font-size: 14pt}
+
+        #tdcell {text-align: left;}
         </style>
     </head>
     <body>
@@ -12,12 +14,12 @@
             <form method="post">
             <table border="0">
                 <tr>
-                    <td colspan="2">
+                    <td id="tdcell" colspan="2">
                         <p>{{message}}</p>
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td id="tdcell">
                         <input type="text" name="date">
                         &nbsp;
                         <select name="utc_offset">
@@ -47,11 +49,11 @@
                             <option>UTC+11</option>
                         </select>
                     </td>
-                    <td>(format dd.mm.yyyy)</td>
+                    <td id="tdcell">(format dd.mm.yyyy)</td>
                 </tr>
                 <tr>
-                    <td><input type="text" name="time"></td>
-                    <td>(format hh:mm)</td>
+                    <td id="tdcell"><input type="text" name="time"></td>
+                    <td id="tdcell">(format hh:mm)</td>
                 </tr>
                 <tr>
                     <td colspan="2">
