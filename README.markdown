@@ -17,3 +17,5 @@ This is a small test case to track a szenario like "It's been x days since last 
 
 * Add multiuser support, create your own alarms with custom text etc
 * use some kind of auth of the secret page
+
+# Some changes on the backend
